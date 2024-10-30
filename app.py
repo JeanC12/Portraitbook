@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 import requests
+import socket
 from googletrans import Translator
 from flask_cors import CORS
 from dotenv import load_dotenv
