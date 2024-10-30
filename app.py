@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 import requests
 from googletrans import Translator
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)  # This line enables CORS for all routes on all origins
@@ -44,10 +45,12 @@ def get_book():
     book_data = get_book_data_by_isbn(isbn)
     return jsonify(book_data)
 
+# DOTENV
+load_dotenv()
 
 if __name__ == "__main__":
-    # Permitir seleccionar el puerto desde la variable de entorno o predeterminado en 5000
-    port = int(
-        os.environ.get("PORT", 5001)
-    )  # El puerto predeterminado es 5000 si no se especifica
-    app.run(debug=True, port=port)
+    _port = os.getenv("PORT")
+    _host = os.getenv("HOST")
+    ip_address = socket.gethostbyname(socket.gethostname())
+    app.run(debug=False, host=_host, port=_port)
+    print(f"Servidor flask corriendo en http://{ip_address}:{_port}")
